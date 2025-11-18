@@ -15,11 +15,11 @@ public class Program
         const string MenuOption6 = "6. Show attacks by LVL";
         const string MenuOption7 = "7. Decode ancient scrolls";
         const string MenuOptionExit = "0. Exit game";
-        const string MenuPrompt = "Choose an option (1-3) - (0) to exit: ";
+        const string MenuPrompt = "Choose an option (1-7) - (0) to exit: ";
         const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 3.";
 
-        int op = 0;
-        string wizardName;
+        int op = 0, level = 0;
+        string wizardName, title="Elantrí";
 
         Random rnd = new Random();
 
@@ -29,7 +29,7 @@ public class Program
         do
         {
             Console.WriteLine(MenuTitle);
-            Console.WriteLine(WelcomeMessage);
+            Console.WriteLine(WelcomeMessage, wizardName,title,level);
             Console.WriteLine(MenuOption1);
             Console.WriteLine(MenuOption2);
             Console.WriteLine(MenuOption3);
