@@ -21,7 +21,7 @@ public class Program
         const string MenuOptionExit = "0. Exit game";
         const string MenuPrompt = "Choose an option (1-7) - (0) to exit: ";
         const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 7.";
-        
+
         //chapter/trainwizard strings
         const string PowerMessage = "Day {0}: After training for {1} hours, you gained {2} power points! You now have a power of {3}!";
         const string TrainingResult = "You are now: {0}, {1}!";
@@ -32,10 +32,10 @@ public class Program
         const string MonsterDefeat = "Congratulations! You defeated the {0}!";
         const string MonsterAttack = "Press enter to attack!";
 
-        string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉"};
+        string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉" };
         int[] monsterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
         string[] monsterDiceArt =
-        {
+        {"",
             @" ________
               /       /|   
              /_______/ |
@@ -86,7 +86,7 @@ public class Program
             "
         };
 
-        int op = 0, power = 0, totalPower = 0, monsterindex, enemyhealth,attack;
+        int op = 0, power = 0, totalPower = 0, monsterindex, enemyhealth, attack;
         string wizardName, title = "Elantrí";
 
         Random rnd = new Random();
@@ -94,11 +94,11 @@ public class Program
         Console.WriteLine("What's your name, oh destined one?");
         wizardName = Console.ReadLine();
         wizardName = char.ToUpper(wizardName[0]) + wizardName.Substring(1);
-         
+
         do
         {
             Console.WriteLine(MenuTitle);
-            Console.WriteLine(WelcomeMessage, wizardName, title, power);
+            Console.WriteLine(WelcomeMessage, wizardName, title, totalPower);
             Console.WriteLine(MenuOption1);
             Console.WriteLine(MenuOption2);
             Console.WriteLine(MenuOption3);
@@ -158,10 +158,11 @@ public class Program
                         do
                         {
                             Console.WriteLine(MonsterAttack);
+                            Console.ReadLine();
                             attack = rnd.Next(1, 7);
                             enemyhealth = enemyhealth - attack;
                             Console.WriteLine(monsterDiceArt[attack]);
-                            Console.WriteLine(MonsterHealth);
+                            Console.WriteLine(MonsterHealth, attack, monsters[monsterindex], enemyhealth);
                         }
                         while (enemyhealth > 0);
                         Console.WriteLine(MonsterDefeat);
