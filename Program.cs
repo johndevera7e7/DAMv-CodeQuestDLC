@@ -17,8 +17,9 @@ public class Program
         const string MenuOptionExit = "0. Exit game";
         const string MenuPrompt = "Choose an option (1-7) - (0) to exit: ";
         const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 3.";
+        const string PowerLevelMessage = "Day {0}: After training for {1} hours, you gained {2} levels! You now have a power level of {3}!";
 
-        int op = 0, level = 0;
+        int op = 0, level = 0,totalLevel = 0;
         string wizardName, title="Elantrí";
 
         Random rnd = new Random();
@@ -39,15 +40,20 @@ public class Program
             Console.WriteLine(MenuOption7);
             Console.WriteLine(MenuOptionExit);
             Console.Write(MenuPrompt);
-
+            
             try
             {
                 op = Convert.ToInt32(Console.ReadLine());
                 switch (op) {
                     case 1:
-
-                        break;
-                        
+                        for (int i= 0; i < 5;i++)
+                        {
+                            level = rnd.Next();
+                            totalLevel = totalLevel + level;
+                            Console.WriteLine(PowerLevelMessage,i,rnd.Next(5,10),level,totalLevel);
+                            Console.WriteLine(AnyKeyContinue);
+                        }
+                        break; 
                 } 
             }
             catch (FormatException)
