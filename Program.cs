@@ -10,7 +10,7 @@ public class Program
         //Menu strings
         const string AnyKeyContinue = "Press enter to continue";
         const string MenuTitle = "===== MAIN MENU - CODEQUEST =====";
-        const string WelcomeMessage = "== Welcome, {0} the {1} with power {2} ==";
+        const string WelcomeMessage = "== Welcome, {0} the {1} with power {2} and level {3}==";
         const string MenuOption1 = "1. Train your wizard";
         const string MenuOption2 = "2. Check the dungeon";
         const string MenuOption3 = "3. Loot the mine";
@@ -31,6 +31,7 @@ public class Program
         const string MonsterHealth = "You did {0} points of damage, now the {1} has {2} health points left!";
         const string MonsterDefeat = "Congratulations! You defeated the {0}!";
         const string MonsterAttack = "Press enter to attack!";
+        const string MonsterLevelUp = "You gained {0} levels, now you are level {1}!";
 
         string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉" };
         int[] monsterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
@@ -86,7 +87,7 @@ public class Program
             "
         };
 
-        int op = 0, power = 0, totalPower = 0, monsterindex, enemyhealth, attack;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack;
         string wizardName, title = "Elantrí";
 
         Random rnd = new Random();
@@ -98,7 +99,7 @@ public class Program
         do
         {
             Console.WriteLine(MenuTitle);
-            Console.WriteLine(WelcomeMessage, wizardName, title, totalPower);
+            Console.WriteLine(WelcomeMessage, wizardName, title, totalPower,totalLevel);
             Console.WriteLine(MenuOption1);
             Console.WriteLine(MenuOption2);
             Console.WriteLine(MenuOption3);
@@ -163,9 +164,11 @@ public class Program
                             enemyhealth = enemyhealth - attack;
                             Console.WriteLine(monsterDiceArt[attack]);
                             Console.WriteLine(MonsterHealth, attack, monsters[monsterindex], enemyhealth);
-                        }
-                        while (enemyhealth > 0);
-                        Console.WriteLine(MonsterDefeat);
+                        } while (enemyhealth > 0);
+                        level = rnd.Next(6);
+                        totalLevel = totalLevel + level;
+                        Console.WriteLine(MonsterDefeat, monsters[monsterindex]);
+                        Console.WriteLine(MonsterLevelUp, level, totalLevel);
                         break;
                 }
             }
