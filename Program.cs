@@ -1,12 +1,16 @@
 ﻿using System;
 
+
 public class Program
 {
     public static void Main()
     {
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+
+        //Menu strings
         const string AnyKeyContinue = "Press enter to continue";
         const string MenuTitle = "===== MAIN MENU - CODEQUEST =====";
-        const string WelcomeMessage = "== Welcome, {0} the {1} with level {2} ==";
+        const string WelcomeMessage = "== Welcome, {0} the {1} with power {2} ==";
         const string MenuOption1 = "1. Train your wizard";
         const string MenuOption2 = "2. Check the dungeon";
         const string MenuOption3 = "3. Loot the mine";
@@ -16,11 +20,73 @@ public class Program
         const string MenuOption7 = "7. Decode ancient scrolls";
         const string MenuOptionExit = "0. Exit game";
         const string MenuPrompt = "Choose an option (1-7) - (0) to exit: ";
-        const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 3.";
-        const string PowerLevelMessage = "Day {0}: After training for {1} hours, you gained {2} levels! You now have a power level of {3}!";
+        const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 7.";
+        
+        //chapter/trainwizard strings
+        const string PowerMessage = "Day {0}: After training for {1} hours, you gained {2} power points! You now have a power of {3}!";
         const string TrainingResult = "You are now: {0}, {1}!";
 
-        int op = 0, level = 0, totalLevel = 0;
+        //chapter/increaselevel
+        const string MonsterAppear = "Oh no, you encountered the {0}, it has {1} points of health!";
+        const string MonsterHealth = "You did {0} points of damage, now the {1} has {2} health points left!";
+        const string MonsterDefeat = "Congratulations! You defeated the {0}!";
+        const string MonsterAttack = "Press enter to attack!";
+
+        string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉"};
+        int[] monsterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
+        string[] monsterDiceArt =
+        {
+            @" ________
+              /       /|   
+             /_______/ |
+             |       | |
+             |   o   | /
+             |       |/ 
+             '-------'
+            ",
+            @" ________
+              /       /|   
+             /_______/ |
+             |     o | |
+             |       | /
+             | o     |/ 
+             '-------'
+            ",
+            @" ________
+              /       /|   
+             /_______/ |
+             |     o | |
+             |   o   | /
+             | o     |/ 
+             '-------'
+            ",
+            @" ________
+              /       /|   
+             /_______/ |
+             | o   o | |
+             |       | /
+             | o   o |/ 
+             '-------'
+            ",
+            @" ________
+              /       /|   
+             /_______/ |
+             | o   o | |
+             |   o   | /
+             | o   o |/ 
+             '-------'
+            ",
+            @" ________
+              /       /|   
+             /_______/ |
+             | o   o | |
+             | o   o | /
+             | o   o |/ 
+             '-------'
+            "
+        };
+
+        int op = 0, power = 0, totalPower = 0, monsterindex, enemyhealth,attack;
         string wizardName, title = "Elantrí";
 
         Random rnd = new Random();
@@ -32,7 +98,7 @@ public class Program
         do
         {
             Console.WriteLine(MenuTitle);
-            Console.WriteLine(WelcomeMessage, wizardName, title, level);
+            Console.WriteLine(WelcomeMessage, wizardName, title, power);
             Console.WriteLine(MenuOption1);
             Console.WriteLine(MenuOption2);
             Console.WriteLine(MenuOption3);
@@ -51,13 +117,13 @@ public class Program
                     case 1:
                         for (int i = 1; i < 6; i++)
                         {
-                            level = rnd.Next(1, 10);
-                            totalLevel = totalLevel + level;
-                            Console.WriteLine(PowerLevelMessage, i, rnd.Next(1, 24), level, totalLevel);
+                            power = rnd.Next(1, 10);
+                            totalPower = totalPower + power;
+                            Console.WriteLine(PowerMessage, i, rnd.Next(1, 24), power, totalPower);
                             Console.WriteLine(AnyKeyContinue);
                             Console.ReadLine();
                         }
-                        switch (totalLevel)
+                        switch (totalPower)
                         {
                             case >= 40:
                                 title = "The Gray";
@@ -84,6 +150,21 @@ public class Program
                                 Console.WriteLine("You suspended.");
                                 break;
                         }
+                        break;
+                    case 2:
+                        monsterindex = rnd.Next(monsters.Length);
+                        enemyhealth = monsterHp[monsterindex];
+                        Console.WriteLine(MonsterAppear, monsters[monsterindex], monsterHp[monsterindex]);
+                        do
+                        {
+                            Console.WriteLine(MonsterAttack);
+                            attack = rnd.Next(1, 7);
+                            enemyhealth = enemyhealth - attack;
+                            Console.WriteLine(monsterDiceArt[attack]);
+                            Console.WriteLine(MonsterHealth);
+                        }
+                        while (enemyhealth > 0);
+                        Console.WriteLine(MonsterDefeat);
                         break;
                 }
             }
