@@ -28,7 +28,7 @@ public class Program
         Console.WriteLine("What's your name, oh destined one?");
         wizardName = Console.ReadLine();
         wizardName = char.ToUpper(wizardName[0]) + wizardName.Substring(1);
-
+         
         do
         {
             Console.WriteLine(MenuTitle);
