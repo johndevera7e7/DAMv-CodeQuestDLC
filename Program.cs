@@ -82,7 +82,7 @@ public class Program
                                 Console.WriteLine(TrainingResult, wizardName, title);
                                 Console.WriteLine("You suspended.");
                                 break;
-                        }
+                        } 
                         break; 
                 } 
             }
