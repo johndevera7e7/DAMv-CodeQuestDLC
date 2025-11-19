@@ -209,7 +209,7 @@ public class Program
                         mineCoin[coinX,coinY] = 1;
                         do
                         {
-                            Console.WriteLine(MineTries, i);
+                            Console.WriteLine(MineTries, mineTries);
                             for (int j = 0; j < 5; j++)
                             {
                                 Console.WriteLine(mineShowInterface[0, j] + mineShowInterface[1, j] + mineShowInterface[2, j] + mineShowInterface[3, j] + mineShowInterface[4, j]);
