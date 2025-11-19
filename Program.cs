@@ -36,8 +36,8 @@ public class Program
         //chapter/lootthemine
         const string WelcomeMine="Welcome to the mine, {0}! Insert your coordinates (0-4) to find some coins!";
         const string MineTries = "You have {0} tries left!";
-        const string InsertCoordinatesY = "Insert a value for the coordinates Y: ";
-        const string InsertCoordinatesX = "Insert a value for the coordinates X: ";
+        const string InsertCoordinatesY = "Insert a value for the coordinates Y (0-4): ";
+        const string InsertCoordinatesX = "Insert a value for the coordinates X (0-4): ";
         const string InsertError = "Nope, not a valid coordinate.";
         const string MineDefeat = "Sorry, not your lucky day.";
         const string MineWin = "Congrats! You won {0} bits!";
