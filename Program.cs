@@ -111,7 +111,7 @@ public class Program
         };
         int[,] mineCoin = new int [5,5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0;
         string wizardName, title = "Elantrí";
         bool foundCoin = false;
 
@@ -249,6 +249,7 @@ public class Program
                         if (foundCoin)
                         {
                             Console.WriteLine(MineWin,coinsGained);
+                            totalCoins = totalCoins + coinsGained;
                         } else
                         {
                             Console.WriteLine(MineDefeat);
