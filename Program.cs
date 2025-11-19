@@ -33,11 +33,20 @@ public class Program
         const string MonsterAttack = "Press enter to attack!";
         const string MonsterLevelUp = "You gained {0} levels, now you are level {1}!";
 
+        //chapter/lootthemine
+        const string WelcomeMine="Welcome to the mine, {0}! Insert your coordinates (0-4) to find some coins!";
+        const string MineTries = "You have {0} tries left!";
+        const string InsertCoordinatesY = "Insert a value for the coordinates Y (0-4): ";
+        const string InsertCoordinatesX = "Insert a value for the coordinates X (0-4): ";
+        const string InsertError = "Nope, not a valid coordinate.";
+        const string MineDefeat = "Sorry, not your lucky day.";
+        const string MineWin = "Congrats! You won {0} bits!";
+
         string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉" };
         int[] monsterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
         string[] monsterDiceArt =
         {"",
-            @" 
+            @"
                ________
               /       /|   
              /_______/ |
@@ -93,8 +102,18 @@ public class Program
             "
         };
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack;
+        string[,] mineShowInterface = {
+            {"➖","➖","➖","➖","➖" },
+            {"➖","➖","➖","➖","➖" },
+            {"➖","➖","➖","➖","➖" },
+            {"➖","➖","➖","➖","➖" },
+            {"➖","➖","➖","➖","➖" }
+        };
+        int[,] mineCoin = new int [5,5];
+
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0;
         string wizardName, title = "Elantrí";
+        bool foundCoin = false;
 
         Random rnd = new Random();
 
@@ -176,6 +195,66 @@ public class Program
                         Console.WriteLine(MonsterDefeat, monsters[monsterindex]);
                         Console.WriteLine(MonsterLevelUp, level, totalLevel);
                         break;
+                    case 3:
+                        for (int i = 0; i < 5; i++)
+                        {
+                            for (int j = 0; j < 5; j++)
+                            {
+                                mineShowInterface[i, j] = "➖";
+                            }
+                        }
+                        Console.WriteLine(WelcomeMine,wizardName);
+                        coinX = rnd.Next(0,5);
+                        coinY = rnd.Next(0,5);
+                        mineCoin[coinX,coinY] = 1;
+                        do
+                        {
+                            Console.WriteLine(MineTries, mineTries);
+                            for (int j = 0; j < 5; j++)
+                            {
+                                Console.WriteLine(mineShowInterface[0, j] + mineShowInterface[1, j] + mineShowInterface[2, j] + mineShowInterface[3, j] + mineShowInterface[4, j]);
+                            }
+                            Console.WriteLine(InsertCoordinatesY);
+                            try
+                            {
+                                y = int.Parse(Console.ReadLine());
+                                Console.WriteLine(InsertCoordinatesX);
+                                x = int.Parse(Console.ReadLine());
+                                if (mineCoin[x, y] == 1)
+                                {
+                                    mineShowInterface[x, y] = "💰";
+                                    foundCoin = true;
+                                    coinsGained = rnd.Next(5, 51);
+                                }
+                                else
+                                {
+                                    mineShowInterface[x, y] = "❌";
+                                    mineTries--;
+                                }
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine(InsertError);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine(InsertError);
+                            }
+
+                        } while (mineTries > 0 && !foundCoin);
+                        for (int j = 0; j < 5; j++)
+                        {
+                            Console.WriteLine(mineShowInterface[0, j] + mineShowInterface[1, j] + mineShowInterface[2, j] + mineShowInterface[3, j] + mineShowInterface[4, j]);
+                        }
+                        if (foundCoin)
+                        {
+                            Console.WriteLine(MineWin,coinsGained);
+                            totalCoins = totalCoins + coinsGained;
+                        } else
+                        {
+                            Console.WriteLine(MineDefeat);
+                        }
+                            break;
                 }
             }
             catch (FormatException)
