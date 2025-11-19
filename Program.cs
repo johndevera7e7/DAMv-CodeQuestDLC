@@ -111,7 +111,7 @@ public class Program
         };
         int[,] mineCoin = new int [5,5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5;
         string wizardName, title = "Elantrí";
         bool foundCoin = false;
 
@@ -196,16 +196,23 @@ public class Program
                         Console.WriteLine(MonsterLevelUp, level, totalLevel);
                         break;
                     case 3:
+                        for (int i = 0; i < 5; i++)
+                        {
+                            for (int j = 0; j < 5; j++)
+                            {
+                                mineShowInterface[i, j] = "➖";
+                            }
+                        }
                         Console.WriteLine(WelcomeMine,wizardName);
                         coinX = rnd.Next(0,5);
                         coinY = rnd.Next(0,5);
                         mineCoin[coinX,coinY] = 1;
-                        for (int i = 5; i > 0; i--)
+                        do
                         {
-                            Console.WriteLine(MineTries,i);
+                            Console.WriteLine(MineTries, i);
                             for (int j = 0; j < 5; j++)
                             {
-                                Console.WriteLine(mineShowInterface[0,j] + mineShowInterface[1, j] + mineShowInterface[2, j] + mineShowInterface[3, j] + mineShowInterface[4, j]);
+                                Console.WriteLine(mineShowInterface[0, j] + mineShowInterface[1, j] + mineShowInterface[2, j] + mineShowInterface[3, j] + mineShowInterface[4, j]);
                             }
                             Console.WriteLine(InsertCoordinatesY);
                             try
@@ -222,16 +229,19 @@ public class Program
                                 else
                                 {
                                     mineShowInterface[x, y] = "❌";
+                                    mineTries--;
                                 }
-                            } catch ( FormatException)
-                            {
-                                Console.WriteLine(InsertError);
-                            } catch (Exception)
+                            }
+                            catch (FormatException)
                             {
                                 Console.WriteLine(InsertError);
                             }
-                            
-                        }
+                            catch (Exception)
+                            {
+                                Console.WriteLine(InsertError);
+                            }
+
+                        } while (mineTries > 0 && !foundCoin);
                         for (int j = 0; j < 5; j++)
                         {
                             Console.WriteLine(mineShowInterface[0, j] + mineShowInterface[1, j] + mineShowInterface[2, j] + mineShowInterface[3, j] + mineShowInterface[4, j]);
