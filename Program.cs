@@ -42,6 +42,10 @@ public class Program
         const string MineDefeat = "Sorry, not your lucky day.";
         const string MineWin = "Congrats! You won {0} bits!";
 
+        //chapter/showinventory
+        const string emptySlot = "Slot {0} is empty.";
+
+        string[] inventory = new string[5];
         string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉" };
         int[] monsterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
         string[] monsterDiceArt =
@@ -254,7 +258,20 @@ public class Program
                         {
                             Console.WriteLine(MineDefeat);
                         }
-                            break;
+                    break;
+                    case 4:
+                        for (int i = 0; i < inventory.Length; i++)
+                        {
+                            if (inventory[i] != null)
+                            {
+                                Console.WriteLine((i + 1) + ". " + inventory[i]);
+                            } else
+                            {
+                                Console.WriteLine(emptySlot,(i + 1));
+                            }
+
+                        }
+                        break;
                 }
             }
             catch (FormatException)
