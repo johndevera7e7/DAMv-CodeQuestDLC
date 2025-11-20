@@ -45,6 +45,17 @@ public class Program
         //chapter/showinventory
         const string emptySlot = "Slot {0} is empty.";
 
+        //chapter/buyitems
+        const string shopShowcase = "These are the items available";
+        const string itemBought= "{0} has been bought";
+        const string buyItem = "Would you like to buy an item? (1 = yes)";
+        const string itemSlotBought = "There's no item available in that spot!";
+        const string inputErrorShop = "Nope, that's not available or a good input.";
+        const string buyItemSlot = "Which item? (Enter the item slot)";
+        const string notEnoughMoney = "You're too broke for the {0}!";
+
+        int[] shopPrices = {30,10,50,40,20};
+        string[] shopItem = {"Iron Dagger","Healing Potion","Ancient Key","Crossbow","Metal Shield"};
         string[] inventory = new string[5];
         string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉" };
         int[] monsterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
@@ -115,7 +126,7 @@ public class Program
         };
         int[,] mineCoin = new int [5,5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0,buyItemInput = 0;
         string wizardName, title = "Elantrí";
         bool foundCoin = false;
 
@@ -211,6 +222,7 @@ public class Program
                         coinX = rnd.Next(0,5);
                         coinY = rnd.Next(0,5);
                         mineCoin[coinX,coinY] = 1;
+                        mineTries = 5;
                         do
                         { 
                             Console.WriteLine(MineTries, mineTries);
@@ -258,7 +270,7 @@ public class Program
                         {
                             Console.WriteLine(MineDefeat);
                         }
-                    break;
+                        break;
                     case 4:
                         for (int i = 0; i < inventory.Length; i++)
                         {
@@ -269,8 +281,65 @@ public class Program
                             {
                                 Console.WriteLine(emptySlot,(i + 1));
                             }
-
                         }
+                        break;
+                    case 5:
+                        Console.WriteLine(shopShowcase);
+                        Console.WriteLine("----------------------------------");
+                        for (int i = 0; i < shopItem.Length; i++)
+                        {
+                            if (shopItem[i] != null)
+                            {
+                                Console.WriteLine((i + 1) + ". " + shopItem[i] + " | Price = " + shopPrices[i]);
+                            }else
+                            {
+                                Console.WriteLine(emptySlot, (i+1));
+                            }
+                            
+                        }
+                        Console.WriteLine(buyItem);
+                        try
+                        {
+                            buyItemInput = int.Parse(Console.ReadLine());
+                            if (buyItemInput == 1)
+                            {
+                                Console.WriteLine(buyItemSlot);
+                                try
+                                {
+                                    buyItemInput = int.Parse(Console.ReadLine()) - 1;
+                                    if (totalCoins > shopPrices[buyItemInput])
+                                    {
+                                        totalCoins = totalCoins - shopPrices[buyItemInput];
+                                        inventory[buyItemInput] = shopItem[buyItemInput];
+                                        shopItem[buyItemInput] = "";
+                                    } else
+                                    {
+                                        Console.WriteLine(notEnoughMoney, shopItem[buyItemInput]);
+                                    }
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine(inputErrorShop);
+                                }
+                                catch (Exception)
+                                {
+                                    Console.WriteLine(inputErrorShop);
+                                }
+                            } else
+                            {
+                                Console.WriteLine("Good bye!");
+                            }
+                            
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine(inputErrorShop);
+                        }
+                        catch (Exception) 
+                        {
+                            Console.WriteLine(inputErrorShop);
+                        }
+
                         break;
                 }
             }
