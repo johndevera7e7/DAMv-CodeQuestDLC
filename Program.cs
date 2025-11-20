@@ -48,7 +48,7 @@ public class Program
         //chapter/buyitems
         const string shopShowcase = "These are the items available";
         const string itemBought= "{0} has been bought";
-        const string buyItem = "Would you like to buy an item? (1 = yes / 0 = no)";
+        const string buyItem = "Would you like to buy an item? (1 = yes)";
         const string itemSlotBought = "There's no item available in that spot!";
         const string inputErrorShop = "Nope, that's not available or a good input.";
         const string buyItemSlot = "Which item? (Enter the item slot)";
@@ -287,8 +287,14 @@ public class Program
                         Console.WriteLine("----------------------------------");
                         for (int i = 0; i < shopItem.Length; i++)
                         {
+                            if (shopItem[i] != null)
+                            {
+                                Console.WriteLine((i + 1) + ". " + shopItem[i] + " | Price = " + shopPrices[i]);
+                            }else
+                            {
+                                Console.WriteLine(emptySlot, (i+1));
+                            }
                             
-                            Console.WriteLine((i + 1) + ". " + shopItem[i] + " | Price = " + shopPrices[i]);
                         }
                         Console.WriteLine(buyItem);
                         try
@@ -299,7 +305,7 @@ public class Program
                                 Console.WriteLine(buyItemSlot);
                                 try
                                 {
-                                    buyItemInput = int.Parse(Console.ReadLine());
+                                    buyItemInput = int.Parse(Console.ReadLine()) - 1;
                                     if (totalCoins > shopPrices[buyItemInput])
                                     {
                                         totalCoins = totalCoins - shopPrices[buyItemInput];
