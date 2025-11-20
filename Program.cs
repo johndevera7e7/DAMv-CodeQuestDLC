@@ -126,7 +126,7 @@ public class Program
         };
         int[,] mineCoin = new int [5,5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0,buyItemInput = 0;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 100,buyItemInput = 0;
         string wizardName, title = "Elantrí";
         bool foundCoin = false;
 
@@ -307,14 +307,18 @@ public class Program
                                 try
                                 {
                                     buyItemInput = int.Parse(Console.ReadLine()) - 1;
-                                    if (totalCoins > shopPrices[buyItemInput])
+                                    if (totalCoins >= shopPrices[buyItemInput])
                                     {
                                         totalCoins = totalCoins - shopPrices[buyItemInput];
                                         inventory[buyItemInput] = shopItem[buyItemInput];
                                         shopItem[buyItemInput] = "";
-                                    } else
+                                        Console.WriteLine(itemBought, shopItem[buyItemInput]);
+                                    } else if (totalCoins < shopPrices[buyItemInput])
                                     {
                                         Console.WriteLine(notEnoughMoney, shopItem[buyItemInput]);
+                                    } else if (shopItem[buyItemInput] == null)
+                                    {
+                                        Console.WriteLine(itemSlotBought);
                                     }
                                 }
                                 catch (FormatException)
