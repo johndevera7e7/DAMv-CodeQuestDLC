@@ -59,8 +59,12 @@ public class Program
 
 
         //chapter/decodescroll
+        const string truth = "1234567890";
+        const string corruptedSymbols = "aeiouàáèéìíòóùúäëïöüâêîôû";
         const string chooseScroll = "Choose a scroll to decode";
         const string scrollInputError = "That's not a scroll";
+        const string corruptedSymbolsFound = "There were {0} hidden corrupted symbols";
+        const string forbiddenTruthMsg ="The forbidden truth is: ";
         
 
         
@@ -146,8 +150,8 @@ public class Program
         };
         int[,] mineCoin = new int [5,5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 100,buyItemInput = 0, maxLevel,scrollchosen;
-        string wizardName, title = "Elantrí";
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 100,buyItemInput = 0, maxLevel,scrollChosen,vowelCounter = 0;
+        string wizardName, title = "Elantrí",forbiddenTruth="";
         bool foundCoin = false;
 
         Random rnd = new Random();
@@ -394,8 +398,48 @@ public class Program
                         }
                         try
                         {
-                            
-                        } 
+                            scrollChosen = int.Parse(Console.ReadLine()) - 1;
+                            if (scrollChosen > -1 && scrollChosen < 3)
+                            {
+                                switch (scrollChosen)
+                                {
+                                    case 0:
+                                        Console.WriteLine(scrolls[scrollChosen].Replace(" ", ""));
+                                        break;
+                                    case 1:
+                                        foreach (char c in scrolls[scrollChosen].ToLower())
+                                        {
+                                            if (corruptedSymbols.Contains(c))
+                                            {
+                                                vowelCounter++;
+                                            }
+                                        }
+                                        Console.WriteLine(corruptedSymbolsFound, vowelCounter);
+                                        break;
+                                    case 2:
+                                        foreach (char c in scrolls[scrollChosen])
+                                        {
+                                            if (truth.Contains(c))
+                                            {
+                                                forbiddenTruth += c;
+                                            }
+                                        }
+                                        Console.WriteLine(forbiddenTruthMsg + forbiddenTruth);
+                                        break;
+                                } 
+                            } else
+                                {
+                                    Console.WriteLine(scrollInputError);
+                                }
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine(scrollInputError);
+                        }
+                        catch (Exception) 
+                        {
+                            Console.WriteLine(scrollInputError);
+                        }
                         break;
                 }
             }
