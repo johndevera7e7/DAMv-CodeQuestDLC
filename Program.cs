@@ -371,7 +371,7 @@ public class Program
                                 {
                                     Console.WriteLine("Level " + (i + 1) + ". " + attacks[i][j]);
                                 }
-                            }
+                            } 
                         break;
                 }
             }
