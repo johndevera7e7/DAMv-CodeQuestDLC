@@ -54,6 +54,17 @@ public class Program
         const string buyItemSlot = "Which item? (Enter the item slot)";
         const string notEnoughMoney = "You're too broke for the {0}!";
 
+        //chapter/showattacks
+        const string availableAttacks = "There are your available attacks.";
+
+        string[][] attacks = 
+        {
+            new[] {"Magic Spark 💫"},
+            new[] {"Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️"},
+            new[] { "Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃"},
+            new[] { "Wave of Light ⚜️", "Storm of Wings 🐦"},
+            new[] {"Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️" },
+        };
         int[] shopPrices = {30,10,50,40,20};
         string[] shopItem = {"Iron Dagger","Healing Potion","Ancient Key","Crossbow","Metal Shield"};
         string[] inventory = new string[5];
@@ -126,7 +137,7 @@ public class Program
         };
         int[,] mineCoin = new int [5,5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 100,buyItemInput = 0;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 100,buyItemInput = 0, maxLevel;
         string wizardName, title = "Elantrí";
         bool foundCoin = false;
 
@@ -343,7 +354,24 @@ public class Program
                         {
                             Console.WriteLine(inputErrorShop);
                         }
-
+                        break;
+                    case 6:
+                        Console.WriteLine(availableAttacks);
+                        if (totalLevel > 5)
+                        {
+                            maxLevel = 5;
+                        }
+                        else
+                        {
+                            maxLevel = totalLevel;
+                        }
+                            for (int i = 0; i < maxLevel; i++)
+                            {
+                                for (int j = 0; j < attacks[i].Length; j++)
+                                {
+                                    Console.WriteLine("Level " + (i + 1) + ". " + attacks[i][j]);
+                                }
+                            } 
                         break;
                 }
             }
