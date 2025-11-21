@@ -227,6 +227,10 @@ public class Program
                             attack = rnd.Next(1, 7);
                             enemyhealth = enemyhealth - attack;
                             Console.WriteLine(monsterDiceArt[attack]);
+                            if (enemyhealth < 0)
+                            {
+                                enemyhealth = 0;
+                            }
                             Console.WriteLine(MonsterHealth, attack, monsters[monsterindex], enemyhealth);
                         } while (enemyhealth > 0);
                         level = rnd.Next(6);
