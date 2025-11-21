@@ -57,6 +57,13 @@ public class Program
         //chapter/showattacks
         const string availableAttacks = "There are your available attacks.";
 
+
+        //chapter/decodescroll
+        const string chooseScroll = "Choose a scroll to decode";
+        const string scrollInputError = "That's not a scroll";
+        
+
+        
         string[][] attacks = 
         {
             new[] {"Magic Spark 💫"},
@@ -69,6 +76,8 @@ public class Program
         string[] shopItem = {"Iron Dagger","Healing Potion","Ancient Key","Crossbow","Metal Shield"};
         string[] inventory = new string[5];
         string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉" };
+        string[] scrolls = { "The 🐲 sleeps in the mountain of fire 🔥", "Ancient magic flows through the crystal caves", "Spell: Ignis 5 🔥, Aqua 6 💧, Terra 3 🌍, Ventus 8 🌪️" };
+        string[] scrollDecode = {"Void elimination","Counter the hidden corrupted symbols","Discover the forbidden truth"};
         int[] monsterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
         string[] monsterDiceArt =
         {"",
@@ -137,7 +146,7 @@ public class Program
         };
         int[,] mineCoin = new int [5,5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 100,buyItemInput = 0, maxLevel;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 100,buyItemInput = 0, maxLevel,scrollchosen;
         string wizardName, title = "Elantrí";
         bool foundCoin = false;
 
@@ -372,6 +381,21 @@ public class Program
                                     Console.WriteLine("Level " + (i + 1) + ". " + attacks[i][j]);
                                 }
                             } 
+                        break;
+                    case 7:
+                        for (int i = 0; i< scrolls.Length; i++)
+                        {
+                            Console.WriteLine((i + 1) + ". " + scrolls[i]);
+                        }
+                        Console.WriteLine(chooseScroll);
+                        for (int i = 0; i < scrollDecode.Length; i++)
+                        {
+                            Console.WriteLine((i + 1) + ". " + scrollDecode[i]);
+                        }
+                        try
+                        {
+                            
+                        } 
                         break;
                 }
             }
