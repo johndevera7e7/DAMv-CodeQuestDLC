@@ -54,6 +54,17 @@ public class Program
         const string buyItemSlot = "Which item? (Enter the item slot)";
         const string notEnoughMoney = "You're too broke for the {0}!";
 
+        //chapter/showattacks
+        const string availableAttacks = "There are your available attacks.";
+
+        string[][] attacks = 
+        {
+            new[] {"Magic Spark 💫"},
+            new[] {"Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️"},
+            new[] { "Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃"},
+            new[] { "Wave of Light ⚜️", "Storm of Wings 🐦"},
+            new[] {"Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️" },
+        };
         int[] shopPrices = {30,10,50,40,20};
         string[] shopItem = {"Iron Dagger","Healing Potion","Ancient Key","Crossbow","Metal Shield"};
         string[] inventory = new string[5];
