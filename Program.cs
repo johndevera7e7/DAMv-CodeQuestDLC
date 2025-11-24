@@ -152,7 +152,7 @@ public class Program
         };
         int[,] mineCoin = new int[5, 5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0,buyItemInput = 0, maxLevel,scrollChosen,vowelCounter = 0;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 50,buyItemInput = 0, maxLevel,scrollChosen,vowelCounter = 0;
         string wizardName, title = "Elantrí",forbiddenTruth="";
         bool foundCoin = false,scroll1 =false,scroll2 =false,scroll3 = false;
 
@@ -341,7 +341,11 @@ public class Program
                                 try
                                 {
                                     buyItemInput = int.Parse(Console.ReadLine()) - 1;
-                                    if (totalCoins >= shopPrices[buyItemInput])
+                                    if (shopItem[buyItemInput] == null)
+                                    {
+                                        Console.WriteLine(itemSlotBought);
+                                    }
+                                    else if (totalCoins >= shopPrices[buyItemInput])
                                     {
                                         Console.WriteLine(itemBought, shopItem[buyItemInput]);
                                         totalCoins = totalCoins - shopPrices[buyItemInput];
@@ -351,10 +355,6 @@ public class Program
                                     else if (totalCoins < shopPrices[buyItemInput])
                                     {
                                         Console.WriteLine(notEnoughMoney, shopItem[buyItemInput]);
-                                    }
-                                    else if (shopItem[buyItemInput] == null)
-                                    {
-                                        Console.WriteLine(itemSlotBought);
                                     }
                                 }
                                 catch (FormatException)
