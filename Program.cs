@@ -59,6 +59,7 @@ public class Program
 
 
         //chapter/decodescroll
+        const string completedScrolls = "Congratulations! You decoded all the ancient scrolls!";
         const string truth = "1234567890";
         const string corruptedSymbols = "aeiouàáèéìíòóùúäëïöüâêîôû";
         const string chooseScroll = "Choose a scroll to decode";
@@ -152,7 +153,7 @@ public class Program
 
         int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0,buyItemInput = 0, maxLevel,scrollChosen,vowelCounter = 0;
         string wizardName, title = "Elantrí",forbiddenTruth="";
-        bool foundCoin = false;
+        bool foundCoin = false,scroll1 =false,scroll2 =false,scroll3 = false;
 
         Random rnd = new Random();
 
@@ -409,6 +410,7 @@ public class Program
                                 {
                                     case 0:
                                         Console.WriteLine(scrolls[scrollChosen].Replace(" ", ""));
+                                        scroll1 = true;
                                         break;
                                     case 1:
                                         foreach (char c in scrolls[scrollChosen].ToLower())
@@ -418,6 +420,7 @@ public class Program
                                                 vowelCounter++;
                                             }
                                         }
+                                        scroll2 = true;
                                         Console.WriteLine(corruptedSymbolsFound, vowelCounter);
                                         break;
                                     case 2:
@@ -428,6 +431,7 @@ public class Program
                                                 forbiddenTruth += c;
                                             }
                                         }
+                                        scroll3 = true;
                                         Console.WriteLine(forbiddenTruthMsg + forbiddenTruth);
                                         break;
                                 } 
@@ -443,6 +447,10 @@ public class Program
                         catch (Exception) 
                         {
                             Console.WriteLine(scrollInputError);
+                        }
+                        if (scroll1 && scroll2 && scroll3)
+                        {
+                            Console.WriteLine(completedScrolls);
                         }
                         break;
                 }
