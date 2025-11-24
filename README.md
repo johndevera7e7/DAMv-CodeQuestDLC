@@ -10,3 +10,19 @@
 | 6 | 4 | op = 2 | wizardname = "Ee" | attack = 6 | monsterindex = 2 | enemyhealth = 0 | totalLevel | level |  enemyhealth > 0 -> false
 | 7 | - | op = 2 | wizardname = "Ee" | attack = 6 | monsterindex = 2 | enemyhealth = 0 | totalLevel = 4| level = 4 |
 | 8 | - | op = 0 | wizardname = "Ee" | attack = 6 | monsterindex = 2 | enemyhealth = 0 | totalLevel = 4| level = 4 | Output = Program closed
+
+# Test case 2: Error Format Exception
+| # Instruction | # Iteration | Variables | | | | | | | Condition | 
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | - | op = 0 | wizardname = "" | attack | monsterindex | enemyhealth | totalLevel | level |
+| 2 | - | op = 0 | wizardname = "Ee" | attack | monsterindex | enemyhealth | totalLevel | level |
+| 3 | - | op = e | wizardname = "Ee" | attack | monsterindex | enemyhealth | totalLevel | level | Output = "Invalid input. Please enter a number between 0 and 3."
+| 4 | - | op = 0 | wizardname = "Ee" | attack | monsterindex | enemyhealth | totalLevel | level | Program closed
+
+# Test case 3: Error Exception
+| # Instruction | # Iteration | Variables | | | | | | | Condition | 
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | - | op = 0 | wizardname = "" | attack | monsterindex | enemyhealth | totalLevel | level |
+| 2 | - | op = 0 | wizardname = "Ee" | attack | monsterindex | enemyhealth | totalLevel | level |
+| 3 | - | op = 9 | wizardname = "Ee" | attack | monsterindex | enemyhealth | totalLevel | level | Output = "Invalid input. Please enter a number between 0 and 3."
+| 4 | - | op = 0 | wizardname = "Ee" | attack | monsterindex | enemyhealth | totalLevel | level | Program closed
