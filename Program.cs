@@ -424,7 +424,7 @@ public class Program
                                         foreach (char c in scrolls[scrollChosen])
                                         {
                                             if (truth.Contains(c))
-                                            {
+                                            { 
                                                 forbiddenTruth += c;
                                             }
                                         }
