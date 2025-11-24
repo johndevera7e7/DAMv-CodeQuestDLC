@@ -207,6 +207,7 @@ public class Program
                         coinX = rnd.Next(0,5);
                         coinY = rnd.Next(0,5);
                         mineCoin[coinX,coinY] = 1;
+                        mineTries = 5;
                         do
                         { 
                             Console.WriteLine(MineTries, mineTries);
