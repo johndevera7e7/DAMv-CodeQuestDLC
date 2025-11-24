@@ -168,6 +168,10 @@ public class Program
                             Console.ReadLine();
                             attack = rnd.Next(1, 7);
                             enemyhealth = enemyhealth - attack;
+                            if (enemyhealth < 0)
+                            {
+                                enemyhealth = 0;
+                            }
                             Console.WriteLine(monsterDiceArt[attack]);
                             Console.WriteLine(MonsterHealth, attack, monsters[monsterindex], enemyhealth);
                         } while (enemyhealth > 0);
