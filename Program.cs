@@ -53,6 +53,7 @@ public class Program
         const string inputErrorShop = "Nope, that's not available or a good input.";
         const string buyItemSlot = "Which item? (Enter the item slot)";
         const string notEnoughMoney = "You're too broke for the {0}!";
+        const string moneyLeft = "You have {0} bits.";
 
         //chapter/showattacks
         const string availableAttacks = "There are your available attacks.";
@@ -329,6 +330,7 @@ public class Program
                             }
 
                         }
+                        Console.WriteLine(moneyLeft, totalCoins);
                         Console.WriteLine(buyItem);
                         try
                         {
