@@ -309,10 +309,10 @@ public class Program
                                     buyItemInput = int.Parse(Console.ReadLine()) - 1;
                                     if (totalCoins >= shopPrices[buyItemInput])
                                     {
+                                        Console.WriteLine(itemBought, shopItem[buyItemInput]);
                                         totalCoins = totalCoins - shopPrices[buyItemInput];
                                         inventory[buyItemInput] = shopItem[buyItemInput];
-                                        shopItem[buyItemInput] = "";
-                                        Console.WriteLine(itemBought, shopItem[buyItemInput]);
+                                        shopItem[buyItemInput] = null;
                                     } else if (totalCoins < shopPrices[buyItemInput])
                                     {
                                         Console.WriteLine(notEnoughMoney, shopItem[buyItemInput]);
