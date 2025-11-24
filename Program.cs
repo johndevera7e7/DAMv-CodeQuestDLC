@@ -34,7 +34,7 @@ public class Program
         const string MonsterLevelUp = "You gained {0} levels, now you are level {1}!";
 
         //chapter/lootthemine
-        const string WelcomeMine="Welcome to the mine, {0}! Insert your coordinates (0-4) to find some coins!";
+        const string WelcomeMine = "Welcome to the mine, {0}! Insert your coordinates (0-4) to find some coins!";
         const string MineTries = "You have {0} tries left!";
         const string InsertCoordinatesY = "Insert a value for the coordinates Y (0-4): ";
         const string InsertCoordinatesX = "Insert a value for the coordinates X (0-4): ";
@@ -47,13 +47,12 @@ public class Program
 
         //chapter/buyitems
         const string shopShowcase = "These are the items available";
-        const string itemBought= "{0} has been bought";
+        const string itemBought = "{0} has been bought";
         const string buyItem = "Would you like to buy an item? (1 = yes)";
         const string itemSlotBought = "There's no item available in that spot!";
         const string inputErrorShop = "Nope, that's not available or a good input.";
         const string buyItemSlot = "Which item? (Enter the item slot)";
         const string notEnoughMoney = "You're too broke for the {0}!";
-        const string moneyLeft = "You have {0} bits.";
 
         //chapter/showattacks
         const string availableAttacks = "There are your available attacks.";
@@ -65,11 +64,11 @@ public class Program
         const string chooseScroll = "Choose a scroll to decode";
         const string scrollInputError = "That's not a scroll";
         const string corruptedSymbolsFound = "There were {0} hidden corrupted symbols";
-        const string forbiddenTruthMsg ="The forbidden truth is: ";
-        
+        const string forbiddenTruthMsg = "The forbidden truth is: ";
 
-        
-        string[][] attacks = 
+
+
+        string[][] attacks =
         {
             new[] {"Magic Spark 💫"},
             new[] {"Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️"},
@@ -77,12 +76,12 @@ public class Program
             new[] { "Wave of Light ⚜️", "Storm of Wings 🐦"},
             new[] {"Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️" },
         };
-        int[] shopPrices = {30,10,50,40,20};
-        string[] shopItem = {"Iron Dagger","Healing Potion","Ancient Key","Crossbow","Metal Shield"};
+        int[] shopPrices = { 30, 10, 50, 40, 20 };
+        string[] shopItem = { "Iron Dagger", "Healing Potion", "Ancient Key", "Crossbow", "Metal Shield" };
         string[] inventory = new string[5];
         string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉" };
         string[] scrolls = { "The 🐲 sleeps in the mountain of fire 🔥", "Ancient magic flows through the crystal caves", "Spell: Ignis 5 🔥, Aqua 6 💧, Terra 3 🌍, Ventus 8 🌪️" };
-        string[] scrollDecode = {"Void elimination","Counter the hidden corrupted symbols","Discover the forbidden truth"};
+        string[] scrollDecode = { "Void elimination", "Counter the hidden corrupted symbols", "Discover the forbidden truth" };
         int[] monsterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
         string[] monsterDiceArt =
         {"",
@@ -149,10 +148,10 @@ public class Program
             {"➖","➖","➖","➖","➖" },
             {"➖","➖","➖","➖","➖" }
         };
-        int[,] mineCoin = new int [5,5];
+        int[,] mineCoin = new int[5, 5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0,buyItemInput = 0;
-        string wizardName, title = "Elantrí";
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y, x, coinY, coinX, coinsGained = 5, mineTries = 5, totalCoins = 0, buyItemInput = 0, maxLevel, scrollChosen, vowelCounter = 0;
+        string wizardName, title = "Elantrí", forbiddenTruth = "";
         bool foundCoin = false;
 
         Random rnd = new Random();
@@ -164,7 +163,7 @@ public class Program
         do
         {
             Console.WriteLine(MenuTitle);
-            Console.WriteLine(WelcomeMessage, wizardName, title, totalPower,totalLevel);
+            Console.WriteLine(WelcomeMessage, wizardName, title, totalPower, totalLevel);
             Console.WriteLine(MenuOption1);
             Console.WriteLine(MenuOption2);
             Console.WriteLine(MenuOption3);
@@ -247,13 +246,13 @@ public class Program
                                 mineShowInterface[i, j] = "➖";
                             }
                         }
-                        Console.WriteLine(WelcomeMine,wizardName);
-                        coinX = rnd.Next(0,5);
-                        coinY = rnd.Next(0,5);
-                        mineCoin[coinX,coinY] = 1;
+                        Console.WriteLine(WelcomeMine, wizardName);
+                        coinX = rnd.Next(0, 5);
+                        coinY = rnd.Next(0, 5);
+                        mineCoin[coinX, coinY] = 1;
                         mineTries = 5;
                         do
-                        { 
+                        {
                             Console.WriteLine(MineTries, mineTries);
                             for (int j = 0; j < 5; j++)
                             {
@@ -293,9 +292,10 @@ public class Program
                         }
                         if (foundCoin)
                         {
-                            Console.WriteLine(MineWin,coinsGained);
+                            Console.WriteLine(MineWin, coinsGained);
                             totalCoins = totalCoins + coinsGained;
-                        } else
+                        }
+                        else
                         {
                             Console.WriteLine(MineDefeat);
                         }
@@ -306,9 +306,10 @@ public class Program
                             if (inventory[i] != null)
                             {
                                 Console.WriteLine((i + 1) + ". " + inventory[i]);
-                            } else
+                            }
+                            else
                             {
-                                Console.WriteLine(emptySlot,(i + 1));
+                                Console.WriteLine(emptySlot, (i + 1));
                             }
                         }
                         break;
@@ -320,13 +321,13 @@ public class Program
                             if (shopItem[i] != null)
                             {
                                 Console.WriteLine((i + 1) + ". " + shopItem[i] + " | Price = " + shopPrices[i]);
-                            }else
-                            {
-                                Console.WriteLine(emptySlot, (i+1));
                             }
-                            
+                            else
+                            {
+                                Console.WriteLine(emptySlot, (i + 1));
+                            }
+
                         }
-                        Console.WriteLine(moneyLeft, totalCoins);
                         Console.WriteLine(buyItem);
                         try
                         {
@@ -343,10 +344,12 @@ public class Program
                                         totalCoins = totalCoins - shopPrices[buyItemInput];
                                         inventory[buyItemInput] = shopItem[buyItemInput];
                                         shopItem[buyItemInput] = null;
-                                    } else if (totalCoins < shopPrices[buyItemInput])
+                                    }
+                                    else if (totalCoins < shopPrices[buyItemInput])
                                     {
                                         Console.WriteLine(notEnoughMoney, shopItem[buyItemInput]);
-                                    } else if (shopItem[buyItemInput] == null)
+                                    }
+                                    else if (shopItem[buyItemInput] == null)
                                     {
                                         Console.WriteLine(itemSlotBought);
                                     }
@@ -359,17 +362,18 @@ public class Program
                                 {
                                     Console.WriteLine(inputErrorShop);
                                 }
-                            } else
+                            }
+                            else
                             {
                                 Console.WriteLine("Good bye!");
                             }
-                            
+
                         }
                         catch (FormatException)
                         {
                             Console.WriteLine(inputErrorShop);
                         }
-                        catch (Exception) 
+                        catch (Exception)
                         {
                             Console.WriteLine(inputErrorShop);
                         }
@@ -384,16 +388,16 @@ public class Program
                         {
                             maxLevel = totalLevel;
                         }
-                            for (int i = 0; i < maxLevel; i++)
+                        for (int i = 0; i < maxLevel; i++)
+                        {
+                            for (int j = 0; j < attacks[i].Length; j++)
                             {
-                                for (int j = 0; j < attacks[i].Length; j++)
-                                {
-                                    Console.WriteLine("Level " + (i + 1) + ". " + attacks[i][j]);
-                                }
-                            } 
+                                Console.WriteLine("Level " + (i + 1) + ". " + attacks[i][j]);
+                            }
+                        }
                         break;
                     case 7:
-                        for (int i = 0; i< scrolls.Length; i++)
+                        for (int i = 0; i < scrolls.Length; i++)
                         {
                             Console.WriteLine((i + 1) + ". " + scrolls[i]);
                         }
@@ -426,23 +430,24 @@ public class Program
                                         foreach (char c in scrolls[scrollChosen])
                                         {
                                             if (truth.Contains(c))
-                                            { 
+                                            {
                                                 forbiddenTruth += c;
                                             }
                                         }
                                         Console.WriteLine(forbiddenTruthMsg + forbiddenTruth);
                                         break;
-                                } 
-                            } else
-                                {
-                                    Console.WriteLine(scrollInputError);
                                 }
+                            }
+                            else
+                            {
+                                Console.WriteLine(scrollInputError);
+                            }
                         }
                         catch (FormatException)
                         {
                             Console.WriteLine(scrollInputError);
                         }
-                        catch (Exception) 
+                        catch (Exception)
                         {
                             Console.WriteLine(scrollInputError);
                         }
