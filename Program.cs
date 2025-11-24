@@ -55,10 +55,34 @@ public class Program
         const string notEnoughMoney = "You're too broke for the {0}!";
         const string moneyLeft = "You have {0} bits.";
 
+        //chapter/showattacks
+        const string availableAttacks = "There are your available attacks.";
+
+
+        //chapter/decodescroll
+        const string truth = "1234567890";
+        const string corruptedSymbols = "aeiouàáèéìíòóùúäëïöüâêîôû";
+        const string chooseScroll = "Choose a scroll to decode";
+        const string scrollInputError = "That's not a scroll";
+        const string corruptedSymbolsFound = "There were {0} hidden corrupted symbols";
+        const string forbiddenTruthMsg ="The forbidden truth is: ";
+        
+
+        
+        string[][] attacks = 
+        {
+            new[] {"Magic Spark 💫"},
+            new[] {"Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️"},
+            new[] { "Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃"},
+            new[] { "Wave of Light ⚜️", "Storm of Wings 🐦"},
+            new[] {"Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️" },
+        };
         int[] shopPrices = {30,10,50,40,20};
         string[] shopItem = {"Iron Dagger","Healing Potion","Ancient Key","Crossbow","Metal Shield"};
         string[] inventory = new string[5];
         string[] monsters = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🦠", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem", "Lost Necromancer ☠️", "Ancient Dragon 🐉" };
+        string[] scrolls = { "The 🐲 sleeps in the mountain of fire 🔥", "Ancient magic flows through the crystal caves", "Spell: Ignis 5 🔥, Aqua 6 💧, Terra 3 🌍, Ventus 8 🌪️" };
+        string[] scrollDecode = {"Void elimination","Counter the hidden corrupted symbols","Discover the forbidden truth"};
         int[] monsterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
         string[] monsterDiceArt =
         {"",
@@ -204,6 +228,10 @@ public class Program
                             attack = rnd.Next(1, 7);
                             enemyhealth = enemyhealth - attack;
                             Console.WriteLine(monsterDiceArt[attack]);
+                            if (enemyhealth < 0)
+                            {
+                                enemyhealth = 0;
+                            }
                             Console.WriteLine(MonsterHealth, attack, monsters[monsterindex], enemyhealth);
                         } while (enemyhealth > 0);
                         level = rnd.Next(6);
@@ -345,7 +373,79 @@ public class Program
                         {
                             Console.WriteLine(inputErrorShop);
                         }
-
+                        break;
+                    case 6:
+                        Console.WriteLine(availableAttacks);
+                        if (totalLevel > 5)
+                        {
+                            maxLevel = 5;
+                        }
+                        else
+                        {
+                            maxLevel = totalLevel;
+                        }
+                            for (int i = 0; i < maxLevel; i++)
+                            {
+                                for (int j = 0; j < attacks[i].Length; j++)
+                                {
+                                    Console.WriteLine("Level " + (i + 1) + ". " + attacks[i][j]);
+                                }
+                            } 
+                        break;
+                    case 7:
+                        for (int i = 0; i< scrolls.Length; i++)
+                        {
+                            Console.WriteLine((i + 1) + ". " + scrolls[i]);
+                        }
+                        Console.WriteLine(chooseScroll);
+                        for (int i = 0; i < scrollDecode.Length; i++)
+                        {
+                            Console.WriteLine((i + 1) + ". " + scrollDecode[i]);
+                        }
+                        try
+                        {
+                            scrollChosen = int.Parse(Console.ReadLine()) - 1;
+                            if (scrollChosen > -1 && scrollChosen < 3)
+                            {
+                                switch (scrollChosen)
+                                {
+                                    case 0:
+                                        Console.WriteLine(scrolls[scrollChosen].Replace(" ", ""));
+                                        break;
+                                    case 1:
+                                        foreach (char c in scrolls[scrollChosen].ToLower())
+                                        {
+                                            if (corruptedSymbols.Contains(c))
+                                            {
+                                                vowelCounter++;
+                                            }
+                                        }
+                                        Console.WriteLine(corruptedSymbolsFound, vowelCounter);
+                                        break;
+                                    case 2:
+                                        foreach (char c in scrolls[scrollChosen])
+                                        {
+                                            if (truth.Contains(c))
+                                            {
+                                                forbiddenTruth += c;
+                                            }
+                                        }
+                                        Console.WriteLine(forbiddenTruthMsg + forbiddenTruth);
+                                        break;
+                                } 
+                            } else
+                                {
+                                    Console.WriteLine(scrollInputError);
+                                }
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine(scrollInputError);
+                        }
+                        catch (Exception) 
+                        {
+                            Console.WriteLine(scrollInputError);
+                        }
                         break;
                 }
             }
