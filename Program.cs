@@ -53,6 +53,7 @@ public class Program
         const string inputErrorShop = "Nope, that's not available or a good input.";
         const string buyItemSlot = "Which item? (Enter the item slot)";
         const string notEnoughMoney = "You're too broke for the {0}!";
+        const string moneyLeft = "You have {0} bits.";
 
         int[] shopPrices = {30,10,50,40,20};
         string[] shopItem = {"Iron Dagger","Healing Potion","Ancient Key","Crossbow","Metal Shield"};
@@ -126,7 +127,7 @@ public class Program
         };
         int[,] mineCoin = new int [5,5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 100,buyItemInput = 0;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0,buyItemInput = 0;
         string wizardName, title = "Elantrí";
         bool foundCoin = false;
 
@@ -297,6 +298,7 @@ public class Program
                             }
                             
                         }
+                        Console.WriteLine(moneyLeft, totalCoins);
                         Console.WriteLine(buyItem);
                         try
                         {
