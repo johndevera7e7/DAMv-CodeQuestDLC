@@ -150,7 +150,7 @@ public class Program
         };
         int[,] mineCoin = new int [5,5];
 
-        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 100,buyItemInput = 0, maxLevel,scrollChosen,vowelCounter = 0;
+        int op = 0, power = 0, totalPower = 0, level, totalLevel = 0, monsterindex, enemyhealth, attack, y,x,coinY,coinX,coinsGained = 5, mineTries = 5, totalCoins = 0,buyItemInput = 0, maxLevel,scrollChosen,vowelCounter = 0;
         string wizardName, title = "Elantrí",forbiddenTruth="";
         bool foundCoin = false;
 
@@ -337,10 +337,10 @@ public class Program
                                     buyItemInput = int.Parse(Console.ReadLine()) - 1;
                                     if (totalCoins >= shopPrices[buyItemInput])
                                     {
+                                        Console.WriteLine(itemBought, shopItem[buyItemInput]);
                                         totalCoins = totalCoins - shopPrices[buyItemInput];
                                         inventory[buyItemInput] = shopItem[buyItemInput];
-                                        shopItem[buyItemInput] = "";
-                                        Console.WriteLine(itemBought, shopItem[buyItemInput]);
+                                        shopItem[buyItemInput] = null;
                                     } else if (totalCoins < shopPrices[buyItemInput])
                                     {
                                         Console.WriteLine(notEnoughMoney, shopItem[buyItemInput]);
